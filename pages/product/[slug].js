@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import {useRouter} from 'next/router';
+import router, {useRouter} from 'next/router';
 import data from '../../utils/data';
 import Layout from '../../components/Layout';
 import { Button, Grid, Link, List, ListItem, Typography } from '@material-ui/core';
@@ -12,6 +12,7 @@ import { Store } from '../../utils/Store';
 import axios from 'axios';
 
 export default function ProductScreen(props) {
+    const router = useRouter();
     const {product} = props;
     const classes = useStyles();
     const {state, dispatch} = useContext(Store);
@@ -27,6 +28,7 @@ export default function ProductScreen(props) {
             return;
         }
         dispatch({ type: 'CART_ADD_ITEM', payload: {...product, quantity: 1}})
+        router.push('/cart');
     }
 
     return (
