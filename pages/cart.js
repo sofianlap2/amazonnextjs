@@ -1,4 +1,4 @@
-import { Button, Grid, Link, MenuItem, Select, Table, TableHead, TableBody, TableCell, TableContainer, TableRow, Typography } from '@material-ui/core';
+import { Button, Grid, Link, MenuItem, Select, Table, TableHead, TableBody, TableCell, TableContainer, TableRow, Typography, ListItem, Card, List } from '@material-ui/core';
 import Layout from '../components/Layout';
 import { Store } from '../utils/Store';
 import NextLink from 'next/link';
@@ -48,7 +48,7 @@ export default function CartScreen() {
                                             </NextLink>
                                         </TableCell>
 
-                                        <TableCell>
+                                        <TableCell allign="right">
                                             <Select value={item.quantity}>
                                                 {[...Array(item.countInStock).keys()].map((x)=> (
                                                 <MenuItem key={x+1} value={x+1}>
@@ -57,12 +57,14 @@ export default function CartScreen() {
                                             </Select>
                                         </TableCell>
 
-                                        <TableCell>
+                                        <TableCell allign="right">
                                             ${item.price}
                                         </TableCell>
 
-                                        <TableCell>
-                                            <Button variant="contained" color="secondary">x</Button>
+                                        <TableCell allign="right">
+                                            <Button variant="contained" color="secondary">
+                                                x
+                                            </Button>
                                         </TableCell>
                                     </TableRow>
                                 ))}
@@ -71,7 +73,19 @@ export default function CartScreen() {
                     </TableContainer>
                 </Grid>
                 <Grid md={3} xs={12}>
-                    cart actions
+                    <Card>
+                        <List>
+                            <ListItem>
+                                <Typography variant="h2">
+                                    Subtotal ({cartItems.reduce((a,c) => a + c.quantity, 0)}{' '}items
+                                    : $ {cartItems.reduce((a,c) => a + c.quantity * c.price, 0)})
+                                </Typography>
+                            </ListItem>
+                            <ListItem>
+                                <Button variant="contained" color="primary" fullWidth>Checkout</Button>
+                            </ListItem>
+                        </List>
+                    </Card>
                 </Grid>
             </Grid>
         )
