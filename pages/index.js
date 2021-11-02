@@ -14,7 +14,7 @@ import { Store } from '../utils/Store';
 
 export default function Home(props) {
   const router = useRouter();
-  const { dispatch} = useContext(Store);
+  const { state, dispatch} = useContext(Store);
   const {products} = props;
   const addToCartHandler = async (product) => {
     const existItem = state.cart.cartItems.find(x => x._id === product._id);
