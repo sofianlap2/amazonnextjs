@@ -20,7 +20,7 @@ handler.post(async (req, res) => {
             isAdmin: user.isAdmin
         })
     } else {
-        res.statusCode(401).send({message: 'Inavlid user or password'});
+        res.status(401).send({message: 'Inavlid user or password'});
     }
 });
 
